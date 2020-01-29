@@ -6,6 +6,15 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Arrays;
 
+//*******************************************************************
+//Table
+//Author: Dr. Steven Roach
+//Date: ~
+//Programming Assignment 1
+//
+//Class provided by the instructor. 
+//*******************************************************************
+
 public class Table {
 	// table is an array of 0..(range-1) X 0..(range-1)
 	private int[][] table; 

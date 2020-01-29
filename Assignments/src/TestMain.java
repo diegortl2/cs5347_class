@@ -4,6 +4,14 @@ import java.io.IOException;
 import cs5387.Table;
 import cs5387.TableSorter;
 
+//*******************************************************************
+//Test main
+//Author: Diego A. Rivera
+//Date: 01/29/2020
+//Programming Assignment 1
+//
+//Program entry point to test and review the results of the new methods implemented. 
+//*******************************************************************
 public class TestMain {
 	
 	public static void main(String[] args) {
@@ -24,7 +32,7 @@ public class TestMain {
 			
 			
 			System.out.println("----------: Sorting Table");
-			TableSorter.SortTable(t);
+			TableSorter.sortable(t);
 			
 			System.out.println("The table: ");
 			System.out.println(t.toString());

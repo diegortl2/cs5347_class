@@ -1,5 +1,16 @@
 package cs5387;
 
+//*******************************************************************
+//Position
+//Author: Diego A. Rivera
+//Date: 01/29/2020
+//Programming Assignment 1
+//
+//Position serves as an abstraction class that handles the operations
+//for a table class that lacks data structure. Identifies neighboring 
+//positions depending on the iteration (by row or by column). It also
+//contains some functions to compare one position to another. 
+//*******************************************************************
 public class Position {
 	public int row;
 	public int col;
@@ -11,26 +22,43 @@ public class Position {
 		max = range;
 	}
 	
-	public Position getNext() {
-		if((col+1) < max) {
-			return new Position(row,col + 1, max);
+	//Gets the next position depending if we are iterating a row or a column. 
+	//It is asymmetric to the Prev method because it returns null after hitting the 
+	//upper boundary of the row or column. This is because the sorting algorithm uses it 
+	//as a base condition to halt the recursion. I'm aware that this should be fixed, 
+	//but didn't have the time to address it. 
+	public Position getNext(boolean isColumn) {
+		if(!isColumn) {
+			if((col+1) < max) {
+				return new Position(row,col + 1, max);
+			}
+			else{
+				return null;
+			}
 		}
-		else if((row + 1) < max) {
-			return new Position(row + 1, 0, max);
+		else { 
+			if((row + 1) < max) {
+		
+				return new Position(row + 1, col, max);
+			}
+			else {
+				return null;
+			}
 		}
-		return null;
 	}
 	
-	public Position getPrev() {
-		if((col-1) >= 0) {
-			return new Position(row,col - 1, max);
+	//Gets previous position depending if we are iterating a row or a column. 
+	//No lower boundary is established in order to comply with the sorting algorithm.
+	public Position getPrev(boolean isColumn) {
+		if(!isColumn) {
+			return new Position( row, col - 1, max);
 		}
-		else if((row - 1) >= 0) {
-			return new Position(row - 1, max-1, max);
+		else { 
+			return new Position( row - 1, col, max);
 		}
-		return new Position(row - 1, max-1, max);
 	}
 	
+	//Check if 2 positions are the same. NOT USED IN THIS VERSION
 	public boolean equals (Position pos) {
 		if(this.row == pos.row && this.col == pos.col) {
 			return true;
@@ -38,6 +66,8 @@ public class Position {
 		return false;
 	}
 	
+	//Determines if a given position is greater than a this position if it's to the right
+	// or under this position. 
 	public boolean smallerThan(Position pos) {
 		if(this.row<pos.row) {
 			return true;
