@@ -22,52 +22,57 @@ public class TableSorter {
 	//provided has all rows and columns sorted.  
 	//*******************************************************************
 	public boolean isSorted(Table table) {
-		
-		int range = table.getSize();
-		
-		Position index;
-		
-		//Iterate through rows
-		for(int rowIndex = 0; rowIndex < range ; rowIndex++) {
-			
-			index = new Position( rowIndex, 0, range);
-			Position next;
-			
-			//Check that all values in the row are sorted
-			while(index.getNext(false)!=null) {
-				next = index.getNext(false);
-				int curVal = table.getTableValue(index.row, index.col);
-				int nextVal = table.getTableValue(next.row, next.col);
+		if(table != null) {
 				
-				if(curVal>nextVal) {
-					return false;
+			int range = table.getSize();
+			
+			Position index;
+			
+			//Iterate through rows
+			for(int rowIndex = 0; rowIndex < range ; rowIndex++) {
+				
+				index = new Position( rowIndex, 0, range);
+				Position next;
+				
+				//Check that all values in the row are sorted
+				while(index.getNext(false)!=null) {
+					next = index.getNext(false);
+					int curVal = table.getTableValue(index.row, index.col);
+					int nextVal = table.getTableValue(next.row, next.col);
+					
+					if(curVal>nextVal) {
+						return false;
+					}
+					
+					index = next;
 				}
-				
-				index = next;
 			}
-		}
-		
-		//Iterate through all columns
-		for(int colIndex = 0; colIndex < range ; colIndex++) {
 			
-			index = new Position( 0, colIndex, range);
-			Position next;
-			
-			//Check that all values in the column are sorted. 
-			while(index.getNext(true)!=null) {
-				next = index.getNext(true);
-				int curVal = table.getTableValue(index.row, index.col);
-				int nextVal = table.getTableValue(next.row, next.col);
+			//Iterate through all columns
+			for(int colIndex = 0; colIndex < range ; colIndex++) {
 				
-				if(curVal>nextVal) {
-					return false;
+				index = new Position( 0, colIndex, range);
+				Position next;
+				
+				//Check that all values in the column are sorted. 
+				while(index.getNext(true)!=null) {
+					next = index.getNext(true);
+					int curVal = table.getTableValue(index.row, index.col);
+					int nextVal = table.getTableValue(next.row, next.col);
+					
+					if(curVal>nextVal) {
+						return false;
+					}
+					
+					index = next;
 				}
-				
-				index = next;
 			}
+			
+			return true; 
 		}
-		
-		return true; 
+		else {
+			throw new NullPointerException();
+		}
 	}
 	
 	
@@ -81,17 +86,22 @@ public class TableSorter {
 	//provided has all rows and columns sorted.  
 	//*******************************************************************
 	public static void sortable(Table table) {
-		QuickSortTable sorter = new QuickSortTable();
-		int range = table.getSize();
-		
-		//sort rows
-		for(int rowIndex = 0; rowIndex < range ; rowIndex++) {
-			sorter.quickSortRow(table, rowIndex);
+		if(table != null) {
+			QuickSortTable sorter = new QuickSortTable();
+			int range = table.getSize();
+			
+			//sort rows
+			for(int rowIndex = 0; rowIndex < range ; rowIndex++) {
+				sorter.quickSortRow(table, rowIndex);
+			}
+			
+			//sort columns 
+			for(int colIndex = 0; colIndex < range ; colIndex++) {
+				sorter.quickSortCol(table, colIndex);
+			}
 		}
-		
-		//sort columns 
-		for(int colIndex = 0; colIndex < range ; colIndex++) {
-			sorter.quickSortCol(table, colIndex);
+		else {
+			throw new NullPointerException();
 		}
 	}
 	
