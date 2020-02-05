@@ -44,6 +44,8 @@ public class TestMain {
 				System.out.println("Failed to sort.");
 			}
 			
+			System.out.println("Operations Performed: " + sorter.getOperationCount());
+			
 			
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block

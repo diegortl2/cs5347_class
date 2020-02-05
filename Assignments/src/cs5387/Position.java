@@ -16,6 +16,7 @@ public class Position {
 	public int col;
 	private int max;
 	
+	//Constructor calling counts as 4 operations
 	public Position(int rowIndex, int colIndex, int range) {
 		row = rowIndex;
 		col = colIndex;
@@ -28,11 +29,13 @@ public class Position {
 	//as a base condition to halt the recursion. I'm aware that this should be fixed, 
 	//but didn't have the time to address it. 
 	public Position getNext(boolean isColumn) {
+		//6 Operations when not null
 		if(!isColumn) {
 			if((col+1) < max) {
 				return new Position(row,col + 1, max);
 			}
 			else{
+				//3 Operations when null
 				return null;
 			}
 		}
@@ -50,6 +53,7 @@ public class Position {
 	//Gets previous position depending if we are iterating a row or a column. 
 	//No lower boundary is established in order to comply with the sorting algorithm.
 	public Position getPrev(boolean isColumn) {
+		//5 Operations total
 		if(!isColumn) {
 			return new Position( row, col - 1, max);
 		}
@@ -69,6 +73,7 @@ public class Position {
 	//Determines if a given position is greater than a this position if it's to the right
 	// or under this position. 
 	public boolean smallerThan(Position pos) {
+		//Can't count, count 4 operations always (worst case)
 		if(this.row<pos.row) {
 			return true;
 		}

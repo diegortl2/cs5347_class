@@ -12,6 +12,7 @@ package cs5387;
 //*******************************************************************
 public class TableSorter {
 	
+	static int operationCount = 0;
 	//*******************************************************************
 	//isSorted
 	//Author: Diego A. Rivera
@@ -86,23 +87,40 @@ public class TableSorter {
 	//provided has all rows and columns sorted.  
 	//*******************************************************************
 	public static void sortable(Table table) {
+		
+		operationCount++;
 		if(table != null) {
+			operationCount+=2; //var assignment and method call
 			QuickSortTable sorter = new QuickSortTable();
+			operationCount+=2; //var assignment and method call
 			int range = table.getSize();
 			
 			//sort rows
+			operationCount++; operationCount++; //for assignment and first comparison
 			for(int rowIndex = 0; rowIndex < range ; rowIndex++) {
 				sorter.quickSortRow(table, rowIndex);
+				operationCount+= sorter.getOperationCount();
+				operationCount+=3;//for index increase + comparison
 			}
 			
 			//sort columns 
+			operationCount++;operationCount++; //for index increase
 			for(int colIndex = 0; colIndex < range ; colIndex++) {
+				operationCount++;
 				sorter.quickSortCol(table, colIndex);
+				operationCount+= sorter.getOperationCount();
+				
+				operationCount+=3;//for index increase + comparison
 			}
 		}
 		else {
+			operationCount+=2; //branch and method call
 			throw new NullPointerException();
 		}
+	}
+	
+	public int getOperationCount() {
+		return operationCount;
 	}
 	
 }
