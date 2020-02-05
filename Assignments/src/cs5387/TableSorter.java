@@ -87,7 +87,7 @@ public class TableSorter {
 	//provided has all rows and columns sorted.  
 	//*******************************************************************
 	public static void sortable(Table table) {
-		
+		operationCount = 0;
 		operationCount++;
 		if(table != null) {
 			operationCount+=2; //var assignment and method call
